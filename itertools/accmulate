@@ -1,0 +1,12 @@
+from  itertools import accumulate
+#to run multple function we have to import operators
+import operator
+a = [2,3,5,6]
+acc = accumulate(a)
+acc_mul = accumulate(a, func= operator.mul)
+print(a)
+print(acc)
+#this gives only add
+print(list(acc))
+#this gives us multiplication functions
+print(list(acc_mul))

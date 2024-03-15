@@ -1,0 +1,9 @@
+from itertools import combinations , combinations_with_replacement
+a= [1,2,3,4,5]
+comb = combinations(a,2)
+print(comb)
+#normaly this will print with replacement 
+print(list(comb))
+#this will print without replacement 
+comb_wr = combinations_with_replacement(a,2)
+print(list(comb_wr))
