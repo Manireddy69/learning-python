@@ -1,1 +1,2 @@
-print("i started learning how to use github")
+ask = input("what is your name?")
+print("my name is",ask)
