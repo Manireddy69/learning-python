@@ -1,0 +1,24 @@
+def sample_function(*args):
+#used to pass only 1 argument like we kept only arg 
+    for arg in args:
+        print(arg)
+#print all the input in list
+sample_function("mani","reddy",123,True,"python")
+
+
+def kwargs_function(**kwargs):
+#in kwargs we can keep multiple augments like we kept x&y as key value pair.
+    for x , y in  kwargs.items():
+        print(x,"+",y)
+
+
+
+kwargs_function(x = "mani",y = "Reddy")
+
+
+def my_function(*args, **kwargs):
+    print("Args:", args)
+    print("Kwargs:", kwargs)
+
+my_function(1, 2, 3, 4, 5, x=1, y=2)
+
