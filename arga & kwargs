@@ -10,10 +10,8 @@ def kwargs_function(**kwargs):
 #in kwargs we can keep multiple augments like we kept x&y as key value pair.
     for x , y in  kwargs.items():
         print(x,"+",y)
-
-
-
 kwargs_function(x = "mani",y = "Reddy")
+#returns  a dictionary of keyword arguments passed to function
 
 
 def my_function(*args, **kwargs):
@@ -21,4 +19,5 @@ def my_function(*args, **kwargs):
     print("Kwargs:", kwargs)
 
 my_function(1, 2, 3, 4, 5, x=1, y=2)
+#returns  dictionary of arguments and their values.
 
