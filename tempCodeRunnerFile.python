@@ -1,0 +1,66 @@
+import numpy as np
+from matplotlib.widgets import Slider
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import make_pipeline
+
+import matplotlib.pyplot as plt
+import time  # Import time module for delay in automatic updates
+
+# Generate sample data
+np.random.seed(0)
+X = np.sort(5 * np.random.rand(40, 1), axis=0)
+y = np.sin(X).ravel() + np.random.normal(0, 0.2, X.shape[0])
+
+# Create a figure and axis
+fig, ax = plt.subplots()
+plt.subplots_adjust(bottom=0.25)
+ax.set_title("Linear Regression with Polynomial Complexity")
+ax.set_xlabel("X")
+ax.set_ylabel("y")
+
+# Scatter plot of the data
+scatter = ax.scatter(X, y, color='blue', label='Data')
+
+# Initial polynomial degree
+initial_degree = 1
+
+# Fit and plot the initial regression line
+def plot_regression(degree):
+    ax.clear()
+    ax.scatter(X, y, color='blue', label='Data')
+    model = make_pipeline(PolynomialFeatures(degree), LinearRegression())
+    model.fit(X, y)
+    X_plot = np.linspace(0, 5, 100).reshape(-1, 1)
+    y_plot = model.predict(X_plot)
+    ax.plot(X_plot, y_plot, color='red', label=f'Degree {degree}')
+    ax.legend()
+    ax.set_title("Linear Regression with Polynomial Complexity")
+    ax.set_xlabel("X")
+    ax.set_ylabel("y")
+    fig.canvas.draw_idle()
+
+plot_regression(initial_degree)
+
+# Add a slider for polynomial degree
+ax_slider = plt.axes([0.2, 0.1, 0.65, 0.03])
+slider = Slider(ax_slider, 'Degree', 1, 15, valinit=initial_degree, valstep=1)  # Set max degree to 15
+
+# Update the plot when the slider value changes
+def update(val):
+    degree = int(slider.val)
+    plot_regression(degree)
+
+slider.on_changed(update)
+
+# Function to demonstrate increasing complexity
+def demonstrate_complexity():
+    for degree in range(1, 16):  # Automatically iterate through degrees 1 to 15
+        slider.set_val(degree)  # Update the slider value
+        time.sleep(1)  # Pause for 1 second to visualize the change
+
+# Start the demonstration in a non-blocking way
+import threading
+threading.Thread(target=demonstrate_complexity, daemon=True).start()
+
+plt.show()
